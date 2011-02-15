@@ -1,0 +1,30 @@
+
+ok, so this is my _first_ programming project i've done without following a
+tutorial or some such.  so it's probably not as efficent or cool or bug-free as
+it could be, but it's my freaking first program so lighten up already!!!
+
+this program allows you to explore the mandelbrot set, which takes a bit of time
+to render on my P4 3.0Ghz machine... so all you spiffy people with your sporty
+multi-core procs and just kiss my broke ...you know what...  dont worry if the
+window dosnt just pop up, it takes a while.  treat it like a little retarted kid.
+i mean... it kind of is (and if you dont like me saying that it's MY little
+retarted kid were talking about here!!)
+
+anyway, interacting with it is fairly simple, just open it up, use the arrow
+keys to move around and the + and - keys to zoom in & out respectivly.
+
+there are plans for switching between the mandelbrot set & the corresponding
+julia set (using the center of the window).  also the ability to write out the
+current fractal image.  that shouldnt be too hard but it's like 2am and i need
+some sleep before i pass out on the keyboard!
+
+oh, some tech requirements for running from source:
+  i used ruby 1.9.2p136 (2010-12-25) [i386-mingw32] and no i didnt type that :P
+though it should probably work with earlier versions if you change the
+relative_require statements in main.rb
+  this uses both gosu and texplay, so go get them & be happy (gem install xxx)
+
+i should have a windows executable up here soon...?  mabye in the morning...
+oh wait it is morning!! :/
+
+anyway, have fun and take care!
