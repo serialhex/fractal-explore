@@ -2,13 +2,6 @@
 require 'mathn'
 require 'complex'
 
-# metaprogramming r0x0rz yo!!!
-# but only when you spell stuff right!!
-Complex.class_eval do
-  def vector
-    return self.real, self.imag
-  end
-end
 
 class Fractal
   
@@ -21,7 +14,6 @@ class Fractal
   end
   
   def initialize window, max_iter = 50
-    puts 'start initialize'
     @window =  window
     @max_iter = max_iter
     
@@ -36,9 +28,11 @@ class Fractal
     @mag_fact = 2
     
     set_vars
-    puts 'end initialize'
   end
   
+  # sets the fractalling in motion and ensures that things go smoothly.
+  # will probably add more functionality - like switching between mandelbrot &
+  # julia sets in here sometime later...
   def update
     catch :stop_fract do
       @fractaling = true
@@ -52,27 +46,27 @@ class Fractal
   
   # sets up the basic variables for the computation
   def set_vars
-    puts 'setting vars'
     throw :stop_fract if @fractaling
     @image.rect 0, 0, @window.width, @window.height, :color => :black, :fill => true
     @image_hash = {}
     @window.width.times do |x|
       @image_hash[x] = {}
       @window.height.times do |y|
-        @image_hash[x][y] = {:zn => Complex( 0.0, 0.0)}
+        @image_hash[x][y] = Complex( 0.0, 0.0)
       end
     end
     @iter = 0
   end
   
+  # the main fractalling function... called by update to accually do the work
   def do_fract
     @iter += 1
     @image_hash.each do |x, y_hsh|
       y_hsh.each do |y, val|
         k = px_to_com x, y
-        zn = @image_hash[x][y][:zn]
+        zn = @image_hash[x][y]
         zn = zn**2 + k
-        @image_hash[x][y][:zn] = zn
+        @image_hash[x][y] = zn
         if (zn.abs2 >= 4.0) or (@iter == @max_iter)
           # colorize!
           if @iter == @max_iter
@@ -92,8 +86,7 @@ class Fractal
   end
   
   # takes pixel coords & gives a Complex number based on current window
-  # magnify is not yuet functional FIXIFIKATE!!!
-  # this is probably _very_ inefficent, but whatev!
+  # sets 100px = 1u on the complex plane
   def px_to_com x, y
     # make it complex to work with :P
     z = Complex x.to_f, y.to_f

@@ -1,9 +1,6 @@
 # awsum fractal explorer program!!
 # by serialhex
 
-File.open('log', 'a') do |f|
-  f.puts "starting..."
-end
 
 require 'gosu'
 require 'texplay'
@@ -11,15 +8,11 @@ require 'texplay'
 require_relative 'fractal'
 require_relative 'fadetext'
 
-File.open('log', 'a') do |f|
-  f.puts "done with require..."
-end
- 
 
 class GameWindow < Gosu::Window
 
   def initialize width, height
-    super width, height, false, 200
+    super width, height, false
     self.caption = "Fractal Explorer of Awsumness!!"
     
     puts 'setting up the fractal & text'
@@ -27,8 +20,6 @@ class GameWindow < Gosu::Window
     @text = FadeText.new self
     
   end
-  
-  attr_reader :offset, :magnification
   
   def update
     case # just in case :P
@@ -57,12 +48,6 @@ class GameWindow < Gosu::Window
   
 end
 
-File.open('log', 'a') do |f|
-  f.puts "making window..."
-end
 # lets get this party started!!
 window = GameWindow.new 640, 480
-File.open('log', 'a') do |f|
-  f.puts "starting window..."
-end
 window.show
